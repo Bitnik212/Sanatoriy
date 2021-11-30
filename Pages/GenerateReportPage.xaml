@@ -1,0 +1,40 @@
+﻿<Page x:Class="MedLab.Pages.GenerateReportPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MedLab.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="650" d:DesignWidth="800"
+      Title="Формирование отчёта">
+
+    <Grid>
+        <TextBlock Style="{StaticResource BlockCommon}" HorizontalAlignment="Left" Margin="130,43,0,0" TextWrapping="Wrap" Text="Сформировать отчёт за период: " VerticalAlignment="Top" Width="217"/>
+        <TextBlock Style="{StaticResource BlockCommon}"  HorizontalAlignment="Left" Margin="279,3,0,0" TextWrapping="Wrap" Text="Создание отчёта" VerticalAlignment="Top" FontWeight="Bold" Width="192" TextDecorations="Underline" FontSize="16"/>
+        <DatePicker x:Name="FromDatePicker" HorizontalAlignment="Left" Margin="352,36,0,0" VerticalAlignment="Top" Width="129" IsTodayHighlighted="False"/>
+        <DatePicker x:Name="ToDatePicker" HorizontalAlignment="Left" Margin="519,36,0,0" VerticalAlignment="Top" Width="129"/>
+        <TextBlock Style="{StaticResource BlockCommon}" HorizontalAlignment="Left" Margin="492,43,0,0" TextWrapping="Wrap" Text="—" VerticalAlignment="Top" Width="15"/>
+        <TextBlock Style="{StaticResource BlockCommon}" HorizontalAlignment="Left" Margin="210,76,0,0" TextWrapping="Wrap" Text="Отчёт по услуге: " VerticalAlignment="Top" Width="122"/>
+        <ComboBox Name="ReportComboBox"  HorizontalAlignment="Left" Margin="337,76,0,0" VerticalAlignment="Top" Width="437" SelectionChanged="ComboBox_SelectionChanged">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Button x:Name="MakeReportButton" Content="Создать отчёт" HorizontalAlignment="Left" Height="30" Margin="480,395,0,0" VerticalAlignment="Top" Width="135" Click="MakeReportButton_Click"/>
+        <Button x:Name="SaveReportButton" Content="Сохранить отчёт" HorizontalAlignment="Left" Height="30" Margin="639,395,0,0" VerticalAlignment="Top" Width="135" Click="SaveReportButton_Click"/>
+        <DataGrid x:Name="ReportDataGrid" HorizontalAlignment="Left" Height="280" Margin="10,106,0,0" VerticalAlignment="Top" Width="764" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding date, StringFormat=\{0:dd.MM.yy\}}" Header="Дата"/>
+                <DataGridTextColumn Binding="{Binding patient_FIO}" Header="ФИО пациента"/>
+                <DataGridTextColumn Binding="{Binding employee_FIO}" Header="ФИО лаборанта"/>
+                <DataGridTextColumn Binding="{Binding cost_order,StringFormat={}{0:F2}}" Header="Стоимость"/>
+
+            </DataGrid.Columns>
+
+
+        </DataGrid>
+        <Button x:Name="CancelButton" Content="Назад" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="CancelButton_Click"/>
+    </Grid>
+</Page>

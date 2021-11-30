@@ -1,0 +1,56 @@
+﻿<Page x:Class="MedLab.Pages.ManagementEmployeesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MedLab.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="650" d:DesignWidth="800"
+      Title="Управление сотрудниками">
+
+    <Grid>
+        <TextBlock Style="{StaticResource BlockCommon}"  HorizontalAlignment="Left" Margin="279,3,0,0" TextWrapping="Wrap" Text="Управление сотрудниками" VerticalAlignment="Top" FontWeight="Bold" Width="218" TextDecorations="Underline" FontSize="16"/>
+        <ListView x:Name="EmployeesListView" HorizontalAlignment="Left" Height="234" Margin="22,101,0,0" VerticalAlignment="Top" Width="383" SelectionChanged="EmployeesListView_SelectionChanged">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+
+                        <TextBlock Grid.Column ="0" Text="{Binding FIO}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <TextBlock Style="{StaticResource BlockCommon}" HorizontalAlignment="Left" Margin="22,77,0,0" TextWrapping="Wrap" Text="Список сотрудников:" VerticalAlignment="Top" Width="145"/>
+        <Button x:Name="AddEmployeesButton" Content="Добавить" HorizontalAlignment="Left" Margin="127,340,0,0" VerticalAlignment="Top" Width="75" Click="AddEmployeesButton_Click"/>
+        <Button x:Name="EditEmployeesButton" Content="Редактировать" HorizontalAlignment="Left" Margin="488,330,0,0" VerticalAlignment="Top" Width="115" Click="EditEmployeesButton_Click"/>
+        <Button x:Name="DelEmployeesButton" Content="Удалить" HorizontalAlignment="Left" Margin="231,340,0,0" VerticalAlignment="Top" Width="75" Click="DelEmployeesButton_Click"/>
+        <GroupBox x:Name="EmployeesGroupBox" Header="Данные о сотрудниках:" HorizontalAlignment="Left" Height="230" Margin="424,90,0,0" VerticalAlignment="Top" Width="354">
+            <Grid Margin="11,0,-3,9">
+
+                <Label Content="ФИО:" HorizontalAlignment="Left" Margin="2,0,0,0" VerticalAlignment="Top" Height="29" Width="51"/>
+                <Label Content="Дата рождения:" HorizontalAlignment="Left" Margin="2,29,0,0" VerticalAlignment="Top" Height="29" Width="118"/>
+                <Label Content="Серия и номер&#xA;паспорта:" HorizontalAlignment="Left" Margin="6,50,0,0" VerticalAlignment="Top" Height="46" Width="111"/>
+                <Label Content="Телефон:" HorizontalAlignment="Left" Margin="45,87,0,0" VerticalAlignment="Top" Height="29" Width="70"/>
+                <Label Content="Должность:" HorizontalAlignment="Left" Margin="29,113,0,0" VerticalAlignment="Top" Height="29" Width="90"/>
+                <Label Content="Логин:" HorizontalAlignment="Left" Margin="61,140,0,0" VerticalAlignment="Top" Height="29" Width="54"/>
+                <Label Content="Пароль:" HorizontalAlignment="Left" Margin="54,168,0,0" VerticalAlignment="Top" Height="29" Width="63"/>
+                <TextBox x:Name="FIOTextBox" HorizontalAlignment="Left" Height="23" Margin="45,2,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="279" PreviewTextInput="FIOTextBox_PreviewTextInput"/>
+                <TextBox x:Name="PassportTextBox" HorizontalAlignment="Left" Height="23" Margin="118,64,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="206" MaxLength="10" PreviewTextInput="PassportTextBox_PreviewTextInput"/>
+                <TextBox x:Name="PhoneTextBox" HorizontalAlignment="Left" Height="23" Margin="118,90,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="206" MaxLength="11" PreviewTextInput="PhoneTextBox_PreviewTextInput"/>
+                <TextBox x:Name="PasswordTextBox" HorizontalAlignment="Left" Height="23" Margin="118,172,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="206" MaxLength="10" PreviewTextInput="PasswordTextBox_PreviewTextInput"/>
+                <TextBox x:Name="LoginTextBox" HorizontalAlignment="Left" Height="23" Margin="118,144,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="206" MaxLength="10" RenderTransformOrigin="0.503,-0.109" PreviewTextInput="LoginTextBox_PreviewTextInput"/>
+                <DatePicker x:Name="BDayDatePicker" HorizontalAlignment="Left" Margin="118,31,0,0" VerticalAlignment="Top" Width="160" IsTodayHighlighted="False" />
+                <ComboBox x:Name="PositionComboBox" HorizontalAlignment="Left" Margin="118,116,0,0" VerticalAlignment="Top" Width="206" Height="23" IsReadOnly="True" >
+                    <ComboBoxItem Content="Администратор"/>
+                    <ComboBoxItem Content="Лаборант"/>
+                    <ComboBoxItem Content="Бухгалтер"/>
+                </ComboBox>
+            </Grid>
+        </GroupBox>
+        <Button x:Name="SaveEmployeesButton" Content="Сохранить" HorizontalAlignment="Left" Margin="634,330,0,0" VerticalAlignment="Top" Width="82" Click="SaveEmployeesButton_Click"/>
+        <Button x:Name="CancelButton" Content="Назад" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="CancelButton_Click"/>
+        <TextBlock Style="{StaticResource BlockCommon}" HorizontalAlignment="Left" Margin="142,73,0,0" TextWrapping="Wrap" Text="Поиск:" VerticalAlignment="Top"/>
+        <TextBox x:Name="SearchTextBox" HorizontalAlignment="Left" Height="23" Margin="247,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="158" TextChanged="SearchTextBox_TextChanged"/>
+
+    </Grid>
+</Page>

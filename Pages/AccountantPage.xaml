@@ -1,0 +1,15 @@
+﻿<Page x:Class="MedLab.Pages.AccountantPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MedLab.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="650" d:DesignWidth="800"
+      Title="Бухгалтер">
+
+    <Grid>
+        <Button x:Name="ViewReportButton" Content="Посмотреть отчёты" HorizontalAlignment="Stretch" Margin="190,136,190,0" Height="50" VerticalAlignment="Top" Click="ViewReportButton_Click"/>
+        <Button x:Name="InsuranceButton" Content="Сформировать счёт страховой компании" HorizontalAlignment="Stretch" Margin="190,209,190,0" Height="50" VerticalAlignment="Top" Click="InsuranceButton_Click"/>
+    </Grid>
+</Page>
