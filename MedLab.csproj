@@ -7,8 +7,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{91819F2A-155F-4FDE-B69C-7D23803E7944}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>MedLab</RootNamespace>
-    <AssemblyName>MedLab</AssemblyName>
+    <RootNamespace>Sanatoriy</RootNamespace>
+    <AssemblyName>Sanatoriy</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -86,7 +86,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CheckingClass.cs" />
+    <Compile Include="Utils\CheckingClass.cs" />
     <Compile Include="Entities\Employee.cs">
       <DependentUpon>LabModel.tt</DependentUpon>
     </Compile>
@@ -103,10 +103,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LabModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entities\LabModel.Designer.cs">
+    <Compile Include="Entities\SanatoriyModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>LabModel.edmx</DependentUpon>
+      <DependentUpon>SanatoriyModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Entities\Order.cs">
       <DependentUpon>LabModel.tt</DependentUpon>
@@ -123,7 +123,7 @@
     <Compile Include="Entities\sysdiagram.cs">
       <DependentUpon>LabModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="InsuranceReportClass.cs" />
+    <Compile Include="Utils\InsuranceReportClass.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -255,12 +255,12 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <EntityDeploy Include="Entities\LabModel.edmx">
+    <EntityDeploy Include="Entities\SanatoriyModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>LabModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>SanatoriyModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Entities\LabModel.edmx.diagram">
-      <DependentUpon>LabModel.edmx</DependentUpon>
+    <None Include="Entities\SanatoriyModel.edmx.diagram">
+      <DependentUpon>SanatoriyModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -275,12 +275,12 @@
     <Content Include="Entities\LabModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>LabModel.Context.cs</LastGenOutput>
-      <DependentUpon>LabModel.edmx</DependentUpon>
+      <DependentUpon>SanatoriyModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Entities\LabModel.edmx.sql" />
+    <Content Include="Entities\SanatoriyModel.edmx.sql" />
     <Content Include="Entities\LabModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>LabModel.edmx</DependentUpon>
+      <DependentUpon>SanatoriyModel.edmx</DependentUpon>
       <LastGenOutput>LabModel.cs</LastGenOutput>
     </Content>
     <Resource Include="Resources\logo.jpg">

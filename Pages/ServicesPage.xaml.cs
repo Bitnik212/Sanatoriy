@@ -13,9 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MedLab.Entities;
+using Sanatoriy.Entities;
 
-namespace MedLab.Pages
+namespace Sanatoriy.Pages
 {
     /// <summary>
     /// Логика взаимодействия для ServicesPage.xaml

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MedLab.Entities
+namespace Sanatoriy.Entities
 {
     using System;
     using System.Data.Entity;

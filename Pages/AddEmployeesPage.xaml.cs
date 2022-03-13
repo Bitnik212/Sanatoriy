@@ -13,8 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MedLab.Entities;
-namespace MedLab.Pages
+using Sanatoriy.Entities
+    ;
+namespace Sanatoriy.Pages
 {
     /// <summary>
     /// Логика взаимодействия для AddEmployeesPage.xaml
