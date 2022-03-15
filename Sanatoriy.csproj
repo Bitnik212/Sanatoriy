@@ -90,7 +90,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Entities\Employees.cs" />
-    <Compile Include="Entities\InsuranceCompanies.cs" />
     <Compile Include="Entities\Orders.cs" />
     <Compile Include="Entities\Patients.cs" />
     <Compile Include="Entities\Roles.cs" />
@@ -136,6 +135,14 @@
     <Compile Include="Migrations\202203151820329_AddAutoGenIdInEmployeesTry5.cs" />
     <Compile Include="Migrations\202203151820329_AddAutoGenIdInEmployeesTry5.designer.cs">
       <DependentUpon>202203151820329_AddAutoGenIdInEmployeesTry5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202203151829217_DeleteInsuranseModel.cs" />
+    <Compile Include="Migrations\202203151829217_DeleteInsuranseModel.designer.cs">
+      <DependentUpon>202203151829217_DeleteInsuranseModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202203151842546_DeleteInsuranseModel1.cs" />
+    <Compile Include="Migrations\202203151842546_DeleteInsuranseModel1.designer.cs">
+      <DependentUpon>202203151842546_DeleteInsuranseModel1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Utils\CheckingClass.cs" />
@@ -330,6 +337,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202203151820329_AddAutoGenIdInEmployeesTry5.resx">
       <DependentUpon>202203151820329_AddAutoGenIdInEmployeesTry5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203151829217_DeleteInsuranseModel.resx">
+      <DependentUpon>202203151829217_DeleteInsuranseModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203151842546_DeleteInsuranseModel1.resx">
+      <DependentUpon>202203151842546_DeleteInsuranseModel1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

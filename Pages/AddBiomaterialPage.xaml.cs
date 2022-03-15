@@ -26,7 +26,6 @@ namespace Sanatoriy.Pages
         {
             InitializeComponent();
            ServicesCombobox.ItemsSource = App.Context.Services.ToList();
-           InsuranceComboBox.ItemsSource = App.Context.InsuranceCompanies.ToList();
             GetControlsIsReadonly(true);
             NumOrderTextBlock.Text= (App.Context.Orders.Max(p => p.id)+1).ToString();
             Update();
@@ -71,8 +70,6 @@ namespace Sanatoriy.Pages
                 PassportTextBox.Text = curPatient.Passport;
                 PhoneTextBox.Text = curPatient.Phone;
                 EmailTextBox.Text = curPatient.Email;
-                InsuranceComboBox.SelectedIndex = (int)curPatient.id_InsuranceCompany - 1;
-                NumInsuranceTextBox.Text = curPatient.Num_Insurance_policy;
                 BDayDatePicker.SelectedDate = curPatient.Bday;
             }
         }

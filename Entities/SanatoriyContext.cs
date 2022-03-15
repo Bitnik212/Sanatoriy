@@ -13,7 +13,6 @@ namespace Sanatoriy.Entities
         }
 
         public virtual DbSet<Employees> Employees { get; set; }
-        public virtual DbSet<InsuranceCompanies> InsuranceCompanies { get; set; }
         public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<Patients> Patients { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
@@ -38,16 +37,6 @@ namespace Sanatoriy.Entities
                 .HasMany(e => e.Orders)
                 .WithOptional(e => e.Employees)
                 .HasForeignKey(e => e.id_employee);
-
-            modelBuilder.Entity<InsuranceCompanies>()
-                .Property(e => e.tariff)
-                .HasPrecision(19, 4);
-
-            modelBuilder.Entity<InsuranceCompanies>()
-                .HasMany(e => e.Patients)
-                .WithRequired(e => e.InsuranceCompanies)
-                .HasForeignKey(e => e.id_InsuranceCompany)
-                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Orders>()
                 .Property(e => e.num_order)
@@ -79,10 +68,6 @@ namespace Sanatoriy.Entities
 
             modelBuilder.Entity<Patients>()
                 .Property(e => e.Phone)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Patients>()
-                .Property(e => e.Num_Insurance_policy)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Patients>()

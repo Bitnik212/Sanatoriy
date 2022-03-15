@@ -35,14 +35,6 @@ namespace Sanatoriy.Entities
         [StringLength(150)]
         public string Email { get; set; }
 
-        public int id_InsuranceCompany { get; set; }
-
-        [Required]
-        [StringLength(10)]
-        public string Num_Insurance_policy { get; set; }
-
-        public virtual InsuranceCompanies InsuranceCompanies { get; set; }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Orders> Orders { get; set; }
     }

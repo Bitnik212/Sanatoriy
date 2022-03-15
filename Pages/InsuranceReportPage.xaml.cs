@@ -26,7 +26,6 @@ namespace Sanatoriy.Pages
         public InsuranceReportPage()
         {
             InitializeComponent();
-            InsuranceComboBox.ItemsSource = App.Context.InsuranceCompanies.ToList();
             var curUser = App.CurrentUser;
             AccountantTextBox.Text = curUser.FIO;
             CurrentDatePicker.SelectedDate = DateTime.Now;
@@ -42,9 +41,7 @@ namespace Sanatoriy.Pages
         {
            if(InsuranceComboBox.SelectedIndex!=-1)
             {
-                var curInComp = InsuranceComboBox.SelectedItem as InsuranceCompanies;
                 var sessions = App.Context.Patients.ToList();
-                sessions = sessions.Where(p => p.id_InsuranceCompany == InsuranceComboBox.SelectedIndex + 1).ToList();
                 int count = sessions.Count();
                 SumInsuranceTextBox.Text = (count * decimal.Parse(TarifTextBox.Text)).ToString();
 
@@ -53,8 +50,6 @@ namespace Sanatoriy.Pages
                 {
                     ReportDate = (DateTime)CurrentDatePicker.SelectedDate,
                     FIO = App.CurrentUser.FIO,
-                    InsuranceName = curInComp.Name,
-                    Tariff = (decimal)curInComp.tariff,
                     Cost = decimal.Parse(SumInsuranceTextBox.Text)
                 });
                 ReportDataGrid.ItemsSource = curReport;
@@ -64,12 +59,6 @@ namespace Sanatoriy.Pages
 
         private void InsuranceComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var curInComp = InsuranceComboBox.SelectedItem as InsuranceCompanies;
-            if (curInComp != null)
-            {
-
-                TarifTextBox.Text = curInComp.tariff.ToString();
-            }
         }
 
         private void SaveAsButton_Click(object sender, RoutedEventArgs e)

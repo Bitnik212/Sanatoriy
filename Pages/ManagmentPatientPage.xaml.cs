@@ -27,7 +27,6 @@ namespace Sanatoriy.Pages
         {
             InitializeComponent();
            
-            InsuranceComboBox.ItemsSource = App.Context.InsuranceCompanies.ToList();
             GetControlsIsReadonly(true);
             Update();
         }
@@ -41,9 +40,7 @@ namespace Sanatoriy.Pages
             BDayDatePicker.IsEnabled = !position;
             PassportTextBox.IsReadOnly = position;
             PhoneTextBox.IsReadOnly = position;
-            InsuranceComboBox.IsEnabled = !position;
             EmailTextBox.IsReadOnly = position;
-            NumInsuranceTextBox.IsReadOnly = position;
             SavePatientButton.IsEnabled = !position;
 
 
@@ -59,8 +56,6 @@ namespace Sanatoriy.Pages
                 PassportTextBox.Text = curPatient.Passport;
                 PhoneTextBox.Text = curPatient.Phone;
                 EmailTextBox.Text = curPatient.Email;
-                InsuranceComboBox.SelectedIndex = (int)curPatient.id_InsuranceCompany - 1;
-                NumInsuranceTextBox.Text = curPatient.Num_Insurance_policy;
                 BDayDatePicker.SelectedDate = curPatient.Bday;
 
             }
@@ -99,8 +94,6 @@ namespace Sanatoriy.Pages
                     patient.Passport = PassportTextBox.Text;
                     patient.Phone = PhoneTextBox.Text;
                     patient.Email = EmailTextBox.Text;
-                    patient.id_InsuranceCompany = InsuranceComboBox.SelectedIndex + 1;
-                    patient.Num_Insurance_policy = NumInsuranceTextBox.Text;
 
                     MessageBox.Show("Внесенные изменения для пациента: " + patient.FIO + " сохранены");
                     App.Context.SaveChanges();
@@ -188,20 +181,7 @@ namespace Sanatoriy.Pages
 
                 return false;
             }
-            if (InsuranceComboBox.SelectedIndex == -1)
-            {
-                MessageBox.Show("Страховая компания не выбрана", "Ошибка");
-
-                return false;
-            }
-
-            if (NumInsuranceTextBox.Text.Length != 10)
-            {
-                MessageBox.Show("Недопустимое количество символов \"Номер страхового полиса\": " + PassportTextBox.Text.Length + ". Поле должно состоять из 10-ти символов.", "Ошибка");
-
-                return false;
-            }
-
+           
             return true;
         }
 

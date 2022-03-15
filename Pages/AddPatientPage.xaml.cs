@@ -26,7 +26,6 @@ namespace Sanatoriy.Pages
         public AddPatientPage()
         {
             InitializeComponent();
-            InsuranceComboBox.ItemsSource = App.Context.InsuranceCompanies.ToList();
            
         }
         private void Checking(TextCompositionEventArgs e,string s)
@@ -65,15 +64,19 @@ namespace Sanatoriy.Pages
                 else
                 {
                     var patient = new Patients();
-                    int countid = App.Context.Patients.Max(p => p.id);
-                    patient.id = countid + 1;
+                    try
+                    {
+                        var countid = App.Context.Patients.Max(p => p.id);
+                        patient.id = countid + 1;
+                    } catch (InvalidOperationException)
+                    {
+                        patient.id = 1;
+                    }
                     patient.FIO = FIOTextBox.Text;
                     patient.Bday = (DateTime)BDayDatePicker.SelectedDate;
                     patient.Passport = PassportTextBox.Text;
                     patient.Phone = PhoneTextBox.Text;
                     patient.Email = EmailTextBox.Text;
-                    patient.id_InsuranceCompany = InsuranceComboBox.SelectedIndex + 1;
-                    patient.Num_Insurance_policy = NumInsuranceTextBox.Text;
                     App.Context.Patients.Add(patient);
                     App.Context.SaveChanges();
                     MessageBox.Show("Добавлен новый пациент: " + patient.FIO + "");
@@ -89,10 +92,7 @@ namespace Sanatoriy.Pages
             BDayDatePicker.Text = "";
             PassportTextBox.Text = "";
             PhoneTextBox.Text = "";
-            InsuranceComboBox.SelectedIndex=-1;
             EmailTextBox.Text = "";
-            NumInsuranceTextBox.Text = "";
-            
         }
 
         private bool CheckIsAllowed()
@@ -141,20 +141,6 @@ namespace Sanatoriy.Pages
 
                 return false;
             }
-            if (InsuranceComboBox.SelectedIndex == -1)
-            {
-                MessageBox.Show("Страховая компания не выбрана", "Ошибка");
-
-                return false;
-            }
-
-            if (NumInsuranceTextBox.Text.Length != 10)
-            {
-                MessageBox.Show("Недопустимое количество символов \"Номер страхового полиса\": " + PassportTextBox.Text.Length + ". Поле должно состоять из 10-ти символов.", "Ошибка");
-
-                return false;
-            }
-
             return true;
         }
 
