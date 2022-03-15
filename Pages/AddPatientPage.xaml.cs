@@ -65,6 +65,8 @@ namespace Sanatoriy.Pages
                 else
                 {
                     var patient = new Patients();
+                    int countid = App.Context.Patients.Max(p => p.id);
+                    patient.id = countid + 1;
                     patient.FIO = FIOTextBox.Text;
                     patient.Bday = (DateTime)BDayDatePicker.SelectedDate;
                     patient.Passport = PassportTextBox.Text;

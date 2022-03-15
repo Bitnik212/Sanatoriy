@@ -86,7 +86,7 @@ namespace Sanatoriy.Pages
         {
             if(CheckIsAllowed())
             {
-                var employee = App.Context.Employees.Find((EmployeesListView.SelectedItem as Employees).id);
+                var employee = App.Context.Employees.Find((EmployeesListView.SelectedItem as Employees).ID);
                  employee.FIO = FIOTextBox.Text;
                  employee.Bday = (DateTime)BDayDatePicker.SelectedDate;
                  employee.Passport = PassportTextBox.Text;

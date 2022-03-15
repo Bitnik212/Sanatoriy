@@ -15,7 +15,7 @@ namespace Sanatoriy.Entities
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int id { get; set; }
+        public int ID { get; set; }
 
         [Required]
         [StringLength(200)]

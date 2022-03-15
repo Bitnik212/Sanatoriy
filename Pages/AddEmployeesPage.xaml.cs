@@ -50,6 +50,8 @@ namespace Sanatoriy.Pages
                 else
                 {
                     Employees employee = new Employees();
+                    int countid = App.Context.Employees.Max(p => p.ID);
+                    employee.ID = countid + 1;
                     employee.FIO = FIOTextBox.Text;
                     employee.Bday = (DateTime) BDayDatePicker.SelectedDate;
                     employee.Passport = PassportTextBox.Text;

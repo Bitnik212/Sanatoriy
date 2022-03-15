@@ -113,6 +113,30 @@
     <Compile Include="Migrations\202203151717339_ReturnTypeInBday.designer.cs">
       <DependentUpon>202203151717339_ReturnTypeInBday.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202203151743481_AddAutoGenIdInEmployees.cs" />
+    <Compile Include="Migrations\202203151743481_AddAutoGenIdInEmployees.designer.cs">
+      <DependentUpon>202203151743481_AddAutoGenIdInEmployees.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202203151747168_AddAutoGenIdInEmployeesTry1.cs" />
+    <Compile Include="Migrations\202203151747168_AddAutoGenIdInEmployeesTry1.designer.cs">
+      <DependentUpon>202203151747168_AddAutoGenIdInEmployeesTry1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202203151751369_AddAutoGenIdInEmployeesTry2.cs" />
+    <Compile Include="Migrations\202203151751369_AddAutoGenIdInEmployeesTry2.designer.cs">
+      <DependentUpon>202203151751369_AddAutoGenIdInEmployeesTry2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202203151756567_AddAutoGenIdInEmployeesTry3.cs" />
+    <Compile Include="Migrations\202203151756567_AddAutoGenIdInEmployeesTry3.designer.cs">
+      <DependentUpon>202203151756567_AddAutoGenIdInEmployeesTry3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202203151811284_AddAutoGenIdInEmployeesTry4.cs" />
+    <Compile Include="Migrations\202203151811284_AddAutoGenIdInEmployeesTry4.designer.cs">
+      <DependentUpon>202203151811284_AddAutoGenIdInEmployeesTry4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202203151820329_AddAutoGenIdInEmployeesTry5.cs" />
+    <Compile Include="Migrations\202203151820329_AddAutoGenIdInEmployeesTry5.designer.cs">
+      <DependentUpon>202203151820329_AddAutoGenIdInEmployeesTry5.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Utils\CheckingClass.cs" />
     <Compile Include="Utils\InsuranceReportClass.cs" />
@@ -288,6 +312,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202203151717339_ReturnTypeInBday.resx">
       <DependentUpon>202203151717339_ReturnTypeInBday.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203151743481_AddAutoGenIdInEmployees.resx">
+      <DependentUpon>202203151743481_AddAutoGenIdInEmployees.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203151747168_AddAutoGenIdInEmployeesTry1.resx">
+      <DependentUpon>202203151747168_AddAutoGenIdInEmployeesTry1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203151751369_AddAutoGenIdInEmployeesTry2.resx">
+      <DependentUpon>202203151751369_AddAutoGenIdInEmployeesTry2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203151756567_AddAutoGenIdInEmployeesTry3.resx">
+      <DependentUpon>202203151756567_AddAutoGenIdInEmployeesTry3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203151811284_AddAutoGenIdInEmployeesTry4.resx">
+      <DependentUpon>202203151811284_AddAutoGenIdInEmployeesTry4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203151820329_AddAutoGenIdInEmployeesTry5.resx">
+      <DependentUpon>202203151820329_AddAutoGenIdInEmployeesTry5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

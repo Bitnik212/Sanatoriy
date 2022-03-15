@@ -89,7 +89,7 @@ namespace Sanatoriy.Pages
             order.id = countid + 1;
             order.date = DateTime.Now;
             order.id_patient = curPatient.id;
-            order.id_employee = curUser.id;
+            order.id_employee = curUser.ID;
             order.id_services =curService.id;
             order.num_order = IDTestTubeTextBox.Text;
             order.cost_order = decimal.Parse(CostTextBox.Text);
