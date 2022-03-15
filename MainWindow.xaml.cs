@@ -24,18 +24,6 @@ namespace Sanatoriy
         {
             InitializeComponent();
             FrameMain.Navigate(new Pages.LoginPage());
-            CurrentTime();
-        }
-
-       
-        public void CurrentTime()
-        {
-            var timer = new System.Windows.Threading.DispatcherTimer();
-            timer.Interval = new TimeSpan(0, 0, 1);
-            timer.IsEnabled = true;
-            timer.Tick += (o, e) => { TxtDate.Text = DateTime.Now.ToString(); };
-            timer.Start();
-
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
@@ -43,7 +31,6 @@ namespace Sanatoriy
             FrameMain.Navigate(new Pages.LoginPage());
             App.CurrentUser = null;
             TxtFIO.Text = "Гость";
-            TxtRole.Text = "";
         }
     }
 }

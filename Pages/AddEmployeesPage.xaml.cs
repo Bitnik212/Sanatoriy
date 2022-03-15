@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -25,7 +26,10 @@ namespace Sanatoriy.Pages
         public AddEmployeesPage()
         {
             InitializeComponent();
+            PositionComboBox.ItemsSource = App.Context.Roles.ToList();
         }
+
+        DateTime parsedBday;
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
@@ -36,7 +40,7 @@ namespace Sanatoriy.Pages
         {
             if (CheckIsAllowed())
             {
-                var currentEmployee = App.Context.Employees.FirstOrDefault(p => p.FIO == FIOTextBox.Text && p.Bday == (DateTime)BDayDatePicker.SelectedDate && p.Passport == PassportTextBox.Text);
+                var currentEmployee = App.Context.Employees.FirstOrDefault(p => p.FIO == FIOTextBox.Text && p.Passport == PassportTextBox.Text);
                 if (currentEmployee != null)
                 {
                     MessageBox.Show($"Сотрудник с такими данными уже существует: {currentEmployee.FIO} \nДата рождения: {currentEmployee.Bday}\nСерия и номер пасспорта: {currentEmployee.Passport}",
@@ -45,20 +49,18 @@ namespace Sanatoriy.Pages
                 }
                 else
                 {
-
-                    var employee = new Employee();
-                    int countid = App.Context.Employees.Max(p => p.id);
-                    employee.id = countid + 1;
+                    Employees employee = new Employees();
                     employee.FIO = FIOTextBox.Text;
-                    employee.Bday = (DateTime)BDayDatePicker.SelectedDate;
+                    employee.Bday = (DateTime) BDayDatePicker.SelectedDate;
                     employee.Passport = PassportTextBox.Text;
                     employee.Phone = PhoneTextBox.Text;
-                    employee.id_Role = PositionComboBox.SelectedIndex;
+                    employee.id_Role = PositionComboBox.SelectedIndex + 1;
                     employee.Login = LoginTextBox.Text;
                     employee.Password = PasswordTextBox.Text;
-                    MessageBox.Show("Добавлен новый сотрудник: " + employee.FIO + "");
+                    employee.Lastenter = DateTime.Now;
                     App.Context.Employees.Add(employee);
                     App.Context.SaveChanges();
+                    MessageBox.Show("Добавлен новый сотрудник: " + employee.FIO + "");
                 }
             }
         }
@@ -100,16 +102,8 @@ namespace Sanatoriy.Pages
                 return false;
             }
 
-            if (BDayDatePicker.SelectedDate == null)
-            {
-                MessageBox.Show("Дата рождения не указана", "Ошибка");
-
-                return false;
-            }
-            if (BDayDatePicker.SelectedDate >= DateTime.Now || DateTime.Now < (DateTime)BDayDatePicker.SelectedDate.Value.AddYears(18))
-            {
-                MessageBox.Show("Недопустимое значение \"Дата рождения\": " + BDayDatePicker.SelectedDate.Value.ToString("dd.MM.yyyy") + ".Возраст сотрудника не может быть меньше 18 лет.", "Ошибка");
-
+            if (!DateTime.TryParse(BDayDatePicker.Text, out parsedBday)) {
+                MessageBox.Show("Введите дату правильно", "Ошибка");
                 return false;
             }
 
@@ -175,7 +169,7 @@ namespace Sanatoriy.Pages
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
             FIOTextBox.Text = "";
-            BDayDatePicker.SelectedDate = null;
+            BDayDatePicker.Text = String.Empty;
             PassportTextBox.Text = "";
             PhoneTextBox.Text = "";
             PositionComboBox.SelectedIndex = -1;

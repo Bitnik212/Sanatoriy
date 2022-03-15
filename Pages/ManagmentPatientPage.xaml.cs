@@ -51,7 +51,7 @@ namespace Sanatoriy.Pages
 
         private void EmployeesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var curPatient = PatientsListView.SelectedItem as Patient;
+            var curPatient = PatientsListView.SelectedItem as Patients;
             App.CurrentPatient = curPatient;
             if (curPatient != null)
             {
@@ -79,10 +79,10 @@ namespace Sanatoriy.Pages
 
         private void DelPatientButton_Click(object sender, RoutedEventArgs e)
         {
-            var curPatient = PatientsListView.SelectedItem as Patient;
+            var curPatient = PatientsListView.SelectedItem as Patients;
             if (MessageBox.Show($"Вы уверены, что хотите удалить пациента: {curPatient.FIO}?",
             "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
-            App.Context.Patients.Remove(PatientsListView.SelectedItem as Patient);
+            App.Context.Patients.Remove(PatientsListView.SelectedItem as Patients);
             MessageBox.Show("Данные пациента удалены");
             App.Context.SaveChanges();
             Update();
@@ -93,7 +93,7 @@ namespace Sanatoriy.Pages
             
                 if (CheckIsAllowed())
                 {
-                    var patient = App.Context.Patients.Find((PatientsListView.SelectedItem as Patient).id);
+                    var patient = App.Context.Patients.Find((PatientsListView.SelectedItem as Patients).id);
                     patient.FIO = FIOTextBox.Text;
                     patient.Bday = (DateTime)BDayDatePicker.SelectedDate;
                     patient.Passport = PassportTextBox.Text;

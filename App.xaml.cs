@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Sanatoriy.Entities;
 
 namespace Sanatoriy
 {
@@ -13,10 +14,10 @@ namespace Sanatoriy
     /// </summary>
     public partial class App : Application
     {
-        public static Entities.MedLaboratoryEntities Context
-        { get; } = new Entities.MedLaboratoryEntities();
-        public static Entities.Employee CurrentUser = null;
-        public static Entities.Patient CurrentPatient = null;
-        public static Entities.Service CurrentService = null;
+        public static SanatoriyContext Context
+        { get; } = new SanatoriyContext();
+        public static Employees CurrentUser = null;
+        public static Patients CurrentPatient = null;
+        public static Services CurrentService = null;
     }
 }

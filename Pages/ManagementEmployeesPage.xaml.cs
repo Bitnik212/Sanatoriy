@@ -49,11 +49,11 @@ namespace Sanatoriy.Pages
         private void EmployeesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
            
-            var curEmployee = EmployeesListView.SelectedItem as Employee;
+            var curEmployee = EmployeesListView.SelectedItem as Employees;
             if(curEmployee!=null)
             {
                 FIOTextBox.Text = curEmployee.FIO;
-                BDayDatePicker.SelectedDate = curEmployee.Bday;
+                BDayDatePicker.SelectedDate = (DateTime) curEmployee.Bday;
                 PassportTextBox.Text = curEmployee.Passport;
                 PhoneTextBox.Text = curEmployee.Phone;
                 PositionComboBox.SelectedIndex = (int)curEmployee.id_Role-1;
@@ -86,7 +86,7 @@ namespace Sanatoriy.Pages
         {
             if(CheckIsAllowed())
             {
-                var employee = App.Context.Employees.Find((EmployeesListView.SelectedItem as Employee).id);
+                var employee = App.Context.Employees.Find((EmployeesListView.SelectedItem as Employees).id);
                  employee.FIO = FIOTextBox.Text;
                  employee.Bday = (DateTime)BDayDatePicker.SelectedDate;
                  employee.Passport = PassportTextBox.Text;
@@ -94,23 +94,23 @@ namespace Sanatoriy.Pages
             employee.id_Role = PositionComboBox.SelectedIndex+1;
             employee.Login = LoginTextBox.Text;
             employee.Password = PasswordTextBox.Text;
-            MessageBox.Show("Внесенные изменения для сотрудника: " + employee.FIO + " сохранены");
-            App.Context.SaveChanges();
+            
             Update();
-            EditEmployeesButton.IsEnabled = true;
+                App.Context.SaveChanges();
+                EditEmployeesButton.IsEnabled = true;
             GetControlsIsReadonly(true);
+            MessageBox.Show("Внесенные изменения для сотрудника: " + employee.FIO + " сохранены");
             }
            
-
 
         }
 
         private void DelEmployeesButton_Click(object sender, RoutedEventArgs e)
         {
-            var curEmployee = EmployeesListView.SelectedItem as Employee;
+            var curEmployee = EmployeesListView.SelectedItem as Employees;
             if (MessageBox.Show($"Вы уверены, что хотите удалить сотрудника: {curEmployee.FIO}?",
             "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
-            App.Context.Employees.Remove(EmployeesListView.SelectedItem as Employee);
+            App.Context.Employees.Remove(EmployeesListView.SelectedItem as Employees);
             MessageBox.Show("Данные сотрудника удалены");
             App.Context.SaveChanges();
             Update();

@@ -49,7 +49,6 @@ namespace Sanatoriy.Pages
                 if(window.GetType()==typeof(MainWindow))
                 {
                     (window as MainWindow).TxtFIO.Text = name;
-                    (window as MainWindow).TxtRole.Text = emp;
                 }
         }
        public void UsersPriority( int lvl,string name)

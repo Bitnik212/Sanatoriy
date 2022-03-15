@@ -64,9 +64,7 @@ namespace Sanatoriy.Pages
                 }
                 else
                 {
-                    var patient = new Patient();
-                    int countid = App.Context.Patients.Max(p => p.id);
-                    patient.id = countid + 1;
+                    var patient = new Patients();
                     patient.FIO = FIOTextBox.Text;
                     patient.Bday = (DateTime)BDayDatePicker.SelectedDate;
                     patient.Passport = PassportTextBox.Text;
@@ -74,10 +72,9 @@ namespace Sanatoriy.Pages
                     patient.Email = EmailTextBox.Text;
                     patient.id_InsuranceCompany = InsuranceComboBox.SelectedIndex + 1;
                     patient.Num_Insurance_policy = NumInsuranceTextBox.Text;
-
-                    MessageBox.Show("Добавлен новый пациент: " + patient.FIO + "");
                     App.Context.Patients.Add(patient);
                     App.Context.SaveChanges();
+                    MessageBox.Show("Добавлен новый пациент: " + patient.FIO + "");
                 }
             }
 

@@ -54,7 +54,7 @@ namespace Sanatoriy.Pages
 
         private void ServicesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var curService = ServicesListView.SelectedItem as Service;
+            var curService = ServicesListView.SelectedItem as Services;
             if (curService != null)
             {
                 NameTextBox.Text = curService.Name;
@@ -73,7 +73,7 @@ namespace Sanatoriy.Pages
 
         private void DelServicesButton_Click(object sender, RoutedEventArgs e)
         {
-            App.Context.Services.Remove(ServicesListView.SelectedItem as Service);
+            App.Context.Services.Remove(ServicesListView.SelectedItem as Services);
             App.Context.SaveChanges();
             Update();
         }
@@ -82,7 +82,7 @@ namespace Sanatoriy.Pages
         {
             if (ServicesListView.SelectedIndex != -1 && CheckIsAllowed())
             {
-                var service = App.Context.Services.Find((ServicesListView.SelectedItem as Service).id);
+                var service = App.Context.Services.Find((ServicesListView.SelectedItem as Services).id);
                 service.Name = NameTextBox.Text;
                 service.Description = DescriptionTextBox.Text;
                 service.Cost = decimal.Parse(CostTextBox.Text);

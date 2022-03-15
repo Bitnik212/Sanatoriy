@@ -47,6 +47,9 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SqlClient, Version=4.6.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Data.SqlClient.4.8.3\lib\net461\System.Data.SqlClient.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.SQLite, Version=1.0.115.5, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\lib\net46\System.Data.SQLite.dll</HintPath>
     </Reference>
@@ -86,43 +89,32 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Entities\Employees.cs" />
+    <Compile Include="Entities\InsuranceCompanies.cs" />
+    <Compile Include="Entities\Orders.cs" />
+    <Compile Include="Entities\Patients.cs" />
+    <Compile Include="Entities\Roles.cs" />
+    <Compile Include="Entities\SanatoriyContext.cs" />
+    <Compile Include="Entities\Services.cs" />
+    <Compile Include="Entities\sysdiagrams.cs" />
+    <Compile Include="Migrations\202203151549284_InitialCreate.cs" />
+    <Compile Include="Migrations\202203151549284_InitialCreate.designer.cs">
+      <DependentUpon>202203151549284_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202203151557263_ChangeTypeInBday.cs" />
+    <Compile Include="Migrations\202203151557263_ChangeTypeInBday.designer.cs">
+      <DependentUpon>202203151557263_ChangeTypeInBday.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202203151711164_ChangeTypeInLastenter.cs" />
+    <Compile Include="Migrations\202203151711164_ChangeTypeInLastenter.designer.cs">
+      <DependentUpon>202203151711164_ChangeTypeInLastenter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202203151717339_ReturnTypeInBday.cs" />
+    <Compile Include="Migrations\202203151717339_ReturnTypeInBday.designer.cs">
+      <DependentUpon>202203151717339_ReturnTypeInBday.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Utils\CheckingClass.cs" />
-    <Compile Include="Entities\Employee.cs">
-      <DependentUpon>LabModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\InsuranceCompany.cs">
-      <DependentUpon>LabModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\LabModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LabModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\LabModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LabModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\SanatoriyModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SanatoriyModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\Order.cs">
-      <DependentUpon>LabModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\Patient.cs">
-      <DependentUpon>LabModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\Role.cs">
-      <DependentUpon>LabModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\Service.cs">
-      <DependentUpon>LabModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\sysdiagram.cs">
-      <DependentUpon>LabModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Utils\InsuranceReportClass.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -255,13 +247,6 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <EntityDeploy Include="Entities\SanatoriyModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SanatoriyModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Entities\SanatoriyModel.edmx.diagram">
-      <DependentUpon>SanatoriyModel.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -272,17 +257,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Entities\LabModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>LabModel.Context.cs</LastGenOutput>
-      <DependentUpon>SanatoriyModel.edmx</DependentUpon>
-    </Content>
     <Content Include="Entities\SanatoriyModel.edmx.sql" />
-    <Content Include="Entities\LabModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SanatoriyModel.edmx</DependentUpon>
-      <LastGenOutput>LabModel.cs</LastGenOutput>
-    </Content>
     <Resource Include="Resources\logo.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -300,6 +275,20 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202203151549284_InitialCreate.resx">
+      <DependentUpon>202203151549284_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203151557263_ChangeTypeInBday.resx">
+      <DependentUpon>202203151557263_ChangeTypeInBday.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203151711164_ChangeTypeInLastenter.resx">
+      <DependentUpon>202203151711164_ChangeTypeInLastenter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203151717339_ReturnTypeInBday.resx">
+      <DependentUpon>202203151717339_ReturnTypeInBday.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

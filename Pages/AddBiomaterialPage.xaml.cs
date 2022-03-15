@@ -49,7 +49,7 @@ namespace Sanatoriy.Pages
 
         private void PatientCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var curService = ServicesCombobox.SelectedItem as Service;
+            var curService = ServicesCombobox.SelectedItem as Services;
             App.CurrentService = curService;
             if (curService!= null)
             {
@@ -62,7 +62,7 @@ namespace Sanatoriy.Pages
 
         private void ServicesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var curPatient = PatientsListView.SelectedItem as Patient;
+            var curPatient = PatientsListView.SelectedItem as Patients;
             App.CurrentPatient = curPatient;
 
             if (curPatient != null)
@@ -84,7 +84,7 @@ namespace Sanatoriy.Pages
             var curPatient = App.CurrentPatient;
             var curUser = App.CurrentUser;
             var curService = App.CurrentService;
-            var order = new Order();
+            var order = new Orders();
             int countid = App.Context.Orders.Max(p => p.id);
             order.id = countid + 1;
             order.date = DateTime.Now;

@@ -46,9 +46,7 @@ namespace Sanatoriy.Pages
             {
                 if (CheckIsAllowed())
                 {
-                    var service = new Service();
-                    int countid = App.Context.Services.Max(p => p.id);
-                    service.id = countid + 1;
+                    var service = new Services();
                     service.Name = NameTextBox.Text;
                     service.Description = DescriptionTextBox.Text;
                     service.Cost = decimal.Parse(CostTextBox.Text);

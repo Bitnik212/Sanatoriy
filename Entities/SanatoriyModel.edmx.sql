@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/13/2022 19:34:34
--- Generated from EDMX file: C:\Users\Bit\source\repos\Bitnik212\Sanatoriy\Entities\LabModel.edmx
+-- Date Created: 03/14/2022 16:06:48
+-- Generated from EDMX file: C:\Users\Bit\source\repos\Bitnik212\Sanatoriy\Entities\SanatoriyModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -23,14 +23,14 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_Orders_Employees]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Orders] DROP CONSTRAINT [FK_Orders_Employees];
 GO
+IF OBJECT_ID(N'[dbo].[FK_Patients_InsuranceCompany]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Patients] DROP CONSTRAINT [FK_Patients_InsuranceCompany];
+GO
 IF OBJECT_ID(N'[dbo].[FK_Orders_Patients]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Orders] DROP CONSTRAINT [FK_Orders_Patients];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Orders_Services1]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Orders] DROP CONSTRAINT [FK_Orders_Services1];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Patients_InsuranceCompany]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Patients] DROP CONSTRAINT [FK_Patients_InsuranceCompany];
 GO
 
 -- --------------------------------------------------
@@ -40,8 +40,8 @@ GO
 IF OBJECT_ID(N'[dbo].[Employees]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Employees];
 GO
-IF OBJECT_ID(N'[dbo].[InsuranceCompany]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[InsuranceCompany];
+IF OBJECT_ID(N'[dbo].[InsuranceCompanies]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[InsuranceCompanies];
 GO
 IF OBJECT_ID(N'[dbo].[Orders]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Orders];
@@ -49,8 +49,8 @@ GO
 IF OBJECT_ID(N'[dbo].[Patients]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Patients];
 GO
-IF OBJECT_ID(N'[dbo].[Role]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Role];
+IF OBJECT_ID(N'[dbo].[Roles]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Roles];
 GO
 IF OBJECT_ID(N'[dbo].[Services]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Services];
@@ -67,7 +67,7 @@ GO
 CREATE TABLE [dbo].[Employees] (
     [id] int  NOT NULL,
     [FIO] varchar(200)  NOT NULL,
-    [Bday] datetime  NOT NULL,
+    [Bday] datetime2  NOT NULL,
     [Passport] varchar(10)  NOT NULL,
     [Phone] varchar(11)  NOT NULL,
     [id_Role] int  NOT NULL,

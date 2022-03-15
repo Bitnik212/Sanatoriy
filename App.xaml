@@ -4,8 +4,8 @@
              xmlns:local="clr-namespace:Sanatoriy"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <SolidColorBrush x:Key="ColorBackground" Color="#DBF5DB"></SolidColorBrush>
-        <SolidColorBrush x:Key="ColorGround" Color="#EDFFED"></SolidColorBrush>
+        <SolidColorBrush x:Key="ColorBackground" Color="#AAC0AA"></SolidColorBrush>
+        <SolidColorBrush x:Key="ColorGround" Color="#7A918D"></SolidColorBrush>
 
         <Style TargetType="Button">
             <Setter Property="Margin" Value="5"></Setter>
