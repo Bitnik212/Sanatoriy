@@ -19,5 +19,6 @@ namespace Sanatoriy
         public static Employees CurrentUser = null;
         public static Patients CurrentPatient = null;
         public static Services CurrentService = null;
+        public static Orders CurrentOrder = null;
     }
 }

@@ -5,15 +5,16 @@ namespace Sanatoriy.Entities
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
-
+    public enum OrderStatusEnum : int
+    {
+        INPROGRESS = 1,
+        COMPLETE = 2,
+        CREATED = 0
+    }
     public partial class Orders
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int id { get; set; }
-
-        [Required]
-        [StringLength(5)]
-        public string num_order { get; set; }
 
         public DateTime date { get; set; }
 
@@ -22,6 +23,7 @@ namespace Sanatoriy.Entities
         public int? id_services { get; set; }
 
         public int? id_employee { get; set; }
+        public OrderStatusEnum Status { get; set; }
 
         public decimal cost_order { get; set; }
 
@@ -40,4 +42,6 @@ namespace Sanatoriy.Entities
 
         public virtual Services Services { get; set; }
     }
+
+   
 }

@@ -27,9 +27,23 @@ namespace Sanatoriy.Pages
             InitializeComponent();
            ServicesCombobox.ItemsSource = App.Context.Services.ToList();
             GetControlsIsReadonly(true);
-            NumOrderTextBlock.Text= (App.Context.Orders.Max(p => p.id)+1).ToString();
+            var count = 0;
+            try
+            {
+                count = App.Context.Orders.Max(p => p.id);
+            }
+            catch (InvalidOperationException)
+            {
+                count = 0;
+            }
+            NumOrderTextBlock.Text= (count + 1).ToString();
             Update();
-
+            List<KeyValuePair<int, string>> orderStatus = new List<KeyValuePair<int, string>>();
+            orderStatus.Add(new KeyValuePair<int, string>(0, "Создан")); 
+            orderStatus.Add(new KeyValuePair<int, string>(1, "Выполняется"));
+            orderStatus.Add(new KeyValuePair<int, string>(2, "Завершен"));
+            ServiceStatusCombobox.ItemsSource = orderStatus;
+            ServiceStatusCombobox.SelectedItem = orderStatus.ElementAt(0);
         }
         private void Update()
         {
@@ -78,25 +92,30 @@ namespace Sanatoriy.Pages
         {
             if (CheckIsAllowed()) 
             { 
-            var curPatient = App.CurrentPatient;
-            var curUser = App.CurrentUser;
-            var curService = App.CurrentService;
-            var order = new Orders();
-            int countid = App.Context.Orders.Max(p => p.id);
-            order.id = countid + 1;
-            order.date = DateTime.Now;
-            order.id_patient = curPatient.id;
-            order.id_employee = curUser.ID;
-            order.id_services =curService.id;
-            order.num_order = IDTestTubeTextBox.Text;
-            order.cost_order = decimal.Parse(CostTextBox.Text);
-            order.service_Name = curService.Name;
-            order.patient_FIO = curPatient.FIO;
-            order.employee_FIO = curUser.FIO;
-            MessageBox.Show("Заказ добавлен","Заказ № "+order.id+"");
-
-            App.Context.Orders.Add(order);
-            App.Context.SaveChanges();
+                var curPatient = App.CurrentPatient;
+                var curUser = App.CurrentUser;
+                var curService = App.CurrentService;
+                var order = new Orders();
+                try
+                {
+                    order.id = App.Context.Orders.Max(p => p.id) + 1;
+                }
+                catch (InvalidOperationException)
+                {
+                    order.id = 1;
+                }
+                order.date = DateTime.Now;
+                order.id_patient = curPatient.id;
+                order.id_employee = curUser.ID;
+                order.id_services =curService.id;
+                order.cost_order = decimal.Parse(CostTextBox.Text);
+                order.service_Name = curService.Name;
+                order.Status = (OrderStatusEnum)((KeyValuePair<int, string>) ServiceStatusCombobox.SelectedItem).Key;
+                order.patient_FIO = curPatient.FIO;
+                order.employee_FIO = curUser.FIO;
+                App.Context.Orders.Add(order);
+                App.Context.SaveChanges();
+                MessageBox.Show("Заказ добавлен", "Заказ № " + order.id + "");
             }
 
         }
@@ -106,9 +125,7 @@ namespace Sanatoriy.Pages
             BDayDatePicker.IsEnabled = !position;
             PassportTextBox.IsReadOnly = position;
             PhoneTextBox.IsReadOnly = position;
-            InsuranceComboBox.IsEnabled = !position;
             EmailTextBox.IsReadOnly = position;
-            NumInsuranceTextBox.IsReadOnly = position;
             
         }
 
@@ -145,11 +162,7 @@ namespace Sanatoriy.Pages
         private bool CheckIsAllowed()
         {
 
-            if (IDTestTubeTextBox.Text == null|| IDTestTubeTextBox.Text == "")
-            { 
-                MessageBox.Show("Введите код пробирки", "Ошибка");
-                return false;
-            }
+            
             if (ServicesCombobox.SelectedIndex == -1)
             {
                 MessageBox.Show("Услуга не выбрана", "Ошибка");
@@ -162,12 +175,7 @@ namespace Sanatoriy.Pages
                 
                 return false;
             }
-            if(IDTestTubeTextBox.Text.Length!=5)
-            {
-                MessageBox.Show("Недопустимое количество символов: "+ IDTestTubeTextBox.Text.Length + ". Код пробирки должен состоять из 5-ти символов.", "Ошибка");
-                
-                return false;
-            }
+           
             return true;
         }
     }

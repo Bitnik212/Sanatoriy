@@ -34,5 +34,10 @@ namespace Sanatoriy.Pages
         {
             NavigationService.Navigate(new GenerateReportPage());
         }
+        private void ManageOrdersButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ManegementServices());
+        }
+
     }
 }

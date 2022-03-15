@@ -39,10 +39,6 @@ namespace Sanatoriy.Entities
                 .HasForeignKey(e => e.id_employee);
 
             modelBuilder.Entity<Orders>()
-                .Property(e => e.num_order)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Orders>()
                 .Property(e => e.cost_order)
                 .HasPrecision(19, 4);
 

@@ -28,8 +28,6 @@ namespace Sanatoriy.Pages
             InitializeComponent();
             ReportComboBox.ItemsSource = App.Context.Services.ToList();
             ReportDataGrid.IsReadOnly = true;
-
-            
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)

@@ -144,7 +144,14 @@
     <Compile Include="Migrations\202203151842546_DeleteInsuranseModel1.designer.cs">
       <DependentUpon>202203151842546_DeleteInsuranseModel1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202203152004030_AddOrderStatus.cs" />
+    <Compile Include="Migrations\202203152004030_AddOrderStatus.designer.cs">
+      <DependentUpon>202203152004030_AddOrderStatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Pages\ManegementServices.xaml.cs">
+      <DependentUpon>ManegementServices.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utils\CheckingClass.cs" />
     <Compile Include="Utils\InsuranceReportClass.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -162,6 +169,10 @@
     <Page Include="Pages\AddEmployeesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ManegementServices.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\AddPatientPage.xaml">
       <SubType>Designer</SubType>
@@ -343,6 +354,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202203151842546_DeleteInsuranseModel1.resx">
       <DependentUpon>202203151842546_DeleteInsuranseModel1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203152004030_AddOrderStatus.resx">
+      <DependentUpon>202203152004030_AddOrderStatus.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

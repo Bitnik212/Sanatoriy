@@ -9,7 +9,8 @@
       Title="Лаборант">
 
     <Grid>
-        <Button x:Name="AddBiomatButton" Content="Принять биоматериал" HorizontalAlignment="Stretch" Margin="190,151,190,0" Height="50" VerticalAlignment="Top" Click="AddBiomatButton_Click"/>
-        <Button x:Name="GenerateReportButton" Content="Сформировать отчёт" HorizontalAlignment="Stretch" Margin="190,224,190,0" Height="50" VerticalAlignment="Top" Click="GenerateReportButton_Click"/>
+        <Button x:Name="AddBiomatButton" Content="Сформаировать оказание услуги" HorizontalAlignment="Stretch" Margin="190,151,190,0" Height="50" VerticalAlignment="Top" Click="AddBiomatButton_Click"/>
+        <Button x:Name="ManageOrdersButton" Content="Изменение оказанием услуги" HorizontalAlignment="Stretch" Margin="190,228,190,0" Height="50" VerticalAlignment="Top" Click="ManageOrdersButton_Click"/>
+        <Button x:Name="GenerateReportButton" Content="Сформировать отчёт" HorizontalAlignment="Stretch" Margin="190,306,190,0" Height="50" VerticalAlignment="Top" Click="GenerateReportButton_Click"/>
     </Grid>
 </Page>
