@@ -1,9 +1,9 @@
-﻿<Page x:Class="MedLab.Pages.AddPatientPage"
+﻿<Page x:Class="Sanatoriy.Pages.AddPatientPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:MedLab.Pages"
+      xmlns:local="clr-namespace:Sanatoriy.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="650" d:DesignWidth="800"
       Title="Добавление нового пациента">
@@ -15,23 +15,13 @@
         <TextBlock Style="{StaticResource BlockCommon}" Text="Серия и номер паспорта:" HorizontalAlignment="Left" Margin="139,115,0,0" VerticalAlignment="Top" Width="172"/>
         <TextBlock Style="{StaticResource BlockCommon}" Text="Телефон:" HorizontalAlignment="Left" Margin="211,145,0,0" VerticalAlignment="Top"/>
         <TextBlock Style="{StaticResource BlockCommon}" Text="E-mail:" HorizontalAlignment="Left" Margin="211,176,0,0" VerticalAlignment="Top"/>
-        <TextBlock Style="{StaticResource BlockCommon}" Text="Страховая компания:" HorizontalAlignment="Left" Margin="165,209,0,0" VerticalAlignment="Top" Width="146"/>
-        <TextBlock Style="{StaticResource BlockCommon}" Text="Номер страхового полиса:" HorizontalAlignment="Left" Margin="124,240,0,0" VerticalAlignment="Top" Width="187"/>
         <TextBox x:Name="FIOTextBox" HorizontalAlignment="Left" Height="23" Margin="316,45,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="449"/>
         <TextBox x:Name="PassportTextBox" HorizontalAlignment="Left" Height="23" Margin="316,114,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="225" MaxLength="10" PreviewTextInput="PassportTextBox_PreviewTextInput"/>
         <TextBox x:Name="PhoneTextBox" HorizontalAlignment="Left" Height="23" Margin="316,145,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="225" MaxLength="11" PreviewTextInput="PhoneTextBox_PreviewTextInput"/>
         <TextBox x:Name="EmailTextBox" HorizontalAlignment="Left" Height="23" Margin="316,176,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="275" MaxLength="150"/>
-        <TextBox x:Name="NumInsuranceTextBox" HorizontalAlignment="Left" Height="23" Margin="316,238,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="241" MaxLength="10" RenderTransformOrigin="0.503,-0.109" PreviewTextInput="NumInsuranceTextBox_PreviewTextInput"/>
         <DatePicker x:Name="BDayDatePicker" HorizontalAlignment="Left" Margin="316,76,0,0" VerticalAlignment="Top" Width="133" IsTodayHighlighted="False"/>
-        <ComboBox x:Name="InsuranceComboBox" HorizontalAlignment="Left" Margin="316,207,0,0" VerticalAlignment="Top" Width="275" Height="23">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Name}"/>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-        <Button x:Name="SaveNewPatientButton" Content="Сохранить" HorizontalAlignment="Left" Margin="248,293,0,0" VerticalAlignment="Top" Width="133" Click="SaveNewPatientButton_Click"/>
-        <Button x:Name="ClearButton" Content="Очистить" HorizontalAlignment="Left" Margin="408,293,0,0" VerticalAlignment="Top" Width="133" Click="ClearButton_Click"/>
+        <Button x:Name="SaveNewPatientButton" Content="Сохранить" HorizontalAlignment="Left" Margin="248,230,0,0" VerticalAlignment="Top" Width="133" Click="SaveNewPatientButton_Click"/>
+        <Button x:Name="ClearButton" Content="Очистить" HorizontalAlignment="Left" Margin="408,230,0,0" VerticalAlignment="Top" Width="133" Click="ClearButton_Click"/>
         <Button x:Name="CancelButton" Content="Назад" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="CancelButton_Click"/>
     </Grid>
 </Page>

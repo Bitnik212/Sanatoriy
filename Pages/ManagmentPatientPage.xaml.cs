@@ -13,9 +13,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MedLab.Entities;
+using Sanatoriy.Entities;
+using Sanatoriy.Utils;
 
-namespace MedLab.Pages
+namespace Sanatoriy.Pages
 {
     /// <summary>
     /// Логика взаимодействия для ManagmentPatientPage.xaml
@@ -26,7 +27,6 @@ namespace MedLab.Pages
         {
             InitializeComponent();
            
-            InsuranceComboBox.ItemsSource = App.Context.InsuranceCompanies.ToList();
             GetControlsIsReadonly(true);
             Update();
         }
@@ -40,9 +40,7 @@ namespace MedLab.Pages
             BDayDatePicker.IsEnabled = !position;
             PassportTextBox.IsReadOnly = position;
             PhoneTextBox.IsReadOnly = position;
-            InsuranceComboBox.IsEnabled = !position;
             EmailTextBox.IsReadOnly = position;
-            NumInsuranceTextBox.IsReadOnly = position;
             SavePatientButton.IsEnabled = !position;
 
 
@@ -50,7 +48,7 @@ namespace MedLab.Pages
 
         private void EmployeesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var curPatient = PatientsListView.SelectedItem as Patient;
+            var curPatient = PatientsListView.SelectedItem as Patients;
             App.CurrentPatient = curPatient;
             if (curPatient != null)
             {
@@ -58,8 +56,6 @@ namespace MedLab.Pages
                 PassportTextBox.Text = curPatient.Passport;
                 PhoneTextBox.Text = curPatient.Phone;
                 EmailTextBox.Text = curPatient.Email;
-                InsuranceComboBox.SelectedIndex = (int)curPatient.id_InsuranceCompany - 1;
-                NumInsuranceTextBox.Text = curPatient.Num_Insurance_policy;
                 BDayDatePicker.SelectedDate = curPatient.Bday;
 
             }
@@ -78,10 +74,10 @@ namespace MedLab.Pages
 
         private void DelPatientButton_Click(object sender, RoutedEventArgs e)
         {
-            var curPatient = PatientsListView.SelectedItem as Patient;
+            var curPatient = PatientsListView.SelectedItem as Patients;
             if (MessageBox.Show($"Вы уверены, что хотите удалить пациента: {curPatient.FIO}?",
             "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
-            App.Context.Patients.Remove(PatientsListView.SelectedItem as Patient);
+            App.Context.Patients.Remove(PatientsListView.SelectedItem as Patients);
             MessageBox.Show("Данные пациента удалены");
             App.Context.SaveChanges();
             Update();
@@ -92,14 +88,12 @@ namespace MedLab.Pages
             
                 if (CheckIsAllowed())
                 {
-                    var patient = App.Context.Patients.Find((PatientsListView.SelectedItem as Patient).id);
+                    var patient = App.Context.Patients.Find((PatientsListView.SelectedItem as Patients).id);
                     patient.FIO = FIOTextBox.Text;
                     patient.Bday = (DateTime)BDayDatePicker.SelectedDate;
                     patient.Passport = PassportTextBox.Text;
                     patient.Phone = PhoneTextBox.Text;
                     patient.Email = EmailTextBox.Text;
-                    patient.id_InsuranceCompany = InsuranceComboBox.SelectedIndex + 1;
-                    patient.Num_Insurance_policy = NumInsuranceTextBox.Text;
 
                     MessageBox.Show("Внесенные изменения для пациента: " + patient.FIO + " сохранены");
                     App.Context.SaveChanges();
@@ -187,20 +181,7 @@ namespace MedLab.Pages
 
                 return false;
             }
-            if (InsuranceComboBox.SelectedIndex == -1)
-            {
-                MessageBox.Show("Страховая компания не выбрана", "Ошибка");
-
-                return false;
-            }
-
-            if (NumInsuranceTextBox.Text.Length != 10)
-            {
-                MessageBox.Show("Недопустимое количество символов \"Номер страхового полиса\": " + PassportTextBox.Text.Length + ". Поле должно состоять из 10-ти символов.", "Ошибка");
-
-                return false;
-            }
-
+           
             return true;
         }
 

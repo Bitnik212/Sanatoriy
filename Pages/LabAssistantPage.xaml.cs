@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MedLab.Pages
+namespace Sanatoriy.Pages
 {
     /// <summary>
     /// Логика взаимодействия для LabAssistantPage.xaml
@@ -34,5 +34,10 @@ namespace MedLab.Pages
         {
             NavigationService.Navigate(new GenerateReportPage());
         }
+        private void ManageOrdersButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ManegementServices());
+        }
+
     }
 }

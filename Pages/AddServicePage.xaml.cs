@@ -13,9 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MedLab.Entities;
+using Sanatoriy.Entities;
 
-namespace MedLab.Pages
+namespace Sanatoriy.Pages
 {
     /// <summary>
     /// Логика взаимодействия для AddServicePage.xaml
@@ -46,9 +46,16 @@ namespace MedLab.Pages
             {
                 if (CheckIsAllowed())
                 {
-                    var service = new Service();
-                    int countid = App.Context.Services.Max(p => p.id);
-                    service.id = countid + 1;
+                    var service = new Services();
+                    try
+                    {
+                        var countid = App.Context.Services.Max(p => p.id);
+                        service.id = countid + 1;
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        service.id = 1;
+                    }
                     service.Name = NameTextBox.Text;
                     service.Description = DescriptionTextBox.Text;
                     service.Cost = decimal.Parse(CostTextBox.Text);

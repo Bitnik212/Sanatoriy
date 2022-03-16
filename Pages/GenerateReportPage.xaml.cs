@@ -16,7 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MedLab.Pages
+namespace Sanatoriy.Pages
 {
     /// <summary>
     /// Логика взаимодействия для GenerateReportPage.xaml
@@ -28,8 +28,6 @@ namespace MedLab.Pages
             InitializeComponent();
             ReportComboBox.ItemsSource = App.Context.Services.ToList();
             ReportDataGrid.IsReadOnly = true;
-
-            
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)

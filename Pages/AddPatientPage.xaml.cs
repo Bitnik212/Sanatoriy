@@ -13,9 +13,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MedLab.Entities;
+using Sanatoriy.Entities;
+using Sanatoriy.Utils;
 
-namespace MedLab.Pages
+namespace Sanatoriy.Pages
 {
     /// <summary>
     /// Логика взаимодействия для AddPatientPage.xaml
@@ -25,7 +26,6 @@ namespace MedLab.Pages
         public AddPatientPage()
         {
             InitializeComponent();
-            InsuranceComboBox.ItemsSource = App.Context.InsuranceCompanies.ToList();
            
         }
         private void Checking(TextCompositionEventArgs e,string s)
@@ -63,20 +63,23 @@ namespace MedLab.Pages
                 }
                 else
                 {
-                    var patient = new Patient();
-                    int countid = App.Context.Patients.Max(p => p.id);
-                    patient.id = countid + 1;
+                    var patient = new Patients();
+                    try
+                    {
+                        var countid = App.Context.Patients.Max(p => p.id);
+                        patient.id = countid + 1;
+                    } catch (InvalidOperationException)
+                    {
+                        patient.id = 1;
+                    }
                     patient.FIO = FIOTextBox.Text;
                     patient.Bday = (DateTime)BDayDatePicker.SelectedDate;
                     patient.Passport = PassportTextBox.Text;
                     patient.Phone = PhoneTextBox.Text;
                     patient.Email = EmailTextBox.Text;
-                    patient.id_InsuranceCompany = InsuranceComboBox.SelectedIndex + 1;
-                    patient.Num_Insurance_policy = NumInsuranceTextBox.Text;
-
-                    MessageBox.Show("Добавлен новый пациент: " + patient.FIO + "");
                     App.Context.Patients.Add(patient);
                     App.Context.SaveChanges();
+                    MessageBox.Show("Добавлен новый пациент: " + patient.FIO + "");
                 }
             }
 
@@ -89,10 +92,7 @@ namespace MedLab.Pages
             BDayDatePicker.Text = "";
             PassportTextBox.Text = "";
             PhoneTextBox.Text = "";
-            InsuranceComboBox.SelectedIndex=-1;
             EmailTextBox.Text = "";
-            NumInsuranceTextBox.Text = "";
-            
         }
 
         private bool CheckIsAllowed()
@@ -141,20 +141,6 @@ namespace MedLab.Pages
 
                 return false;
             }
-            if (InsuranceComboBox.SelectedIndex == -1)
-            {
-                MessageBox.Show("Страховая компания не выбрана", "Ошибка");
-
-                return false;
-            }
-
-            if (NumInsuranceTextBox.Text.Length != 10)
-            {
-                MessageBox.Show("Недопустимое количество символов \"Номер страхового полиса\": " + PassportTextBox.Text.Length + ". Поле должно состоять из 10-ти символов.", "Ошибка");
-
-                return false;
-            }
-
             return true;
         }
 

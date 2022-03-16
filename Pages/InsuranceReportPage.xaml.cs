@@ -13,9 +13,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MedLab.Entities;
+using Sanatoriy.Entities;
+using Sanatoriy.Utils;
 
-namespace MedLab.Pages
+namespace Sanatoriy.Pages
 {
     /// <summary>
     /// Логика взаимодействия для InsuranceReportPage.xaml
@@ -25,7 +26,6 @@ namespace MedLab.Pages
         public InsuranceReportPage()
         {
             InitializeComponent();
-            InsuranceComboBox.ItemsSource = App.Context.InsuranceCompanies.ToList();
             var curUser = App.CurrentUser;
             AccountantTextBox.Text = curUser.FIO;
             CurrentDatePicker.SelectedDate = DateTime.Now;
@@ -41,9 +41,7 @@ namespace MedLab.Pages
         {
            if(InsuranceComboBox.SelectedIndex!=-1)
             {
-                var curInComp = InsuranceComboBox.SelectedItem as InsuranceCompany;
                 var sessions = App.Context.Patients.ToList();
-                sessions = sessions.Where(p => p.id_InsuranceCompany == InsuranceComboBox.SelectedIndex + 1).ToList();
                 int count = sessions.Count();
                 SumInsuranceTextBox.Text = (count * decimal.Parse(TarifTextBox.Text)).ToString();
 
@@ -52,8 +50,6 @@ namespace MedLab.Pages
                 {
                     ReportDate = (DateTime)CurrentDatePicker.SelectedDate,
                     FIO = App.CurrentUser.FIO,
-                    InsuranceName = curInComp.Name,
-                    Tariff = (decimal)curInComp.tariff,
                     Cost = decimal.Parse(SumInsuranceTextBox.Text)
                 });
                 ReportDataGrid.ItemsSource = curReport;
@@ -63,12 +59,6 @@ namespace MedLab.Pages
 
         private void InsuranceComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var curInComp = InsuranceComboBox.SelectedItem as InsuranceCompany;
-            if (curInComp != null)
-            {
-
-                TarifTextBox.Text = curInComp.tariff.ToString();
-            }
         }
 
         private void SaveAsButton_Click(object sender, RoutedEventArgs e)

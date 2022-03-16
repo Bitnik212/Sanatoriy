@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MedLab.Pages
+namespace Sanatoriy.Pages
 {
     /// <summary>
     /// Логика взаимодействия для LoginPage.xaml
@@ -49,7 +49,6 @@ namespace MedLab.Pages
                 if(window.GetType()==typeof(MainWindow))
                 {
                     (window as MainWindow).TxtFIO.Text = name;
-                    (window as MainWindow).TxtRole.Text = emp;
                 }
         }
        public void UsersPriority( int lvl,string name)

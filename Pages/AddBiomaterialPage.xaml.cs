@@ -12,9 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MedLab.Entities;
+using Sanatoriy.Entities;
+using Sanatoriy.Utils;
 
-namespace MedLab.Pages
+namespace Sanatoriy.Pages
 {
     /// <summary>
     /// Логика взаимодействия для AddBiomaterialPage.xaml
@@ -25,11 +26,24 @@ namespace MedLab.Pages
         {
             InitializeComponent();
            ServicesCombobox.ItemsSource = App.Context.Services.ToList();
-           InsuranceComboBox.ItemsSource = App.Context.InsuranceCompanies.ToList();
             GetControlsIsReadonly(true);
-            NumOrderTextBlock.Text= (App.Context.Orders.Max(p => p.id)+1).ToString();
+            var count = 0;
+            try
+            {
+                count = App.Context.Orders.Max(p => p.id);
+            }
+            catch (InvalidOperationException)
+            {
+                count = 0;
+            }
+            NumOrderTextBlock.Text= (count + 1).ToString();
             Update();
-
+            List<KeyValuePair<int, string>> orderStatus = new List<KeyValuePair<int, string>>();
+            orderStatus.Add(new KeyValuePair<int, string>(0, "Создан")); 
+            orderStatus.Add(new KeyValuePair<int, string>(1, "Выполняется"));
+            orderStatus.Add(new KeyValuePair<int, string>(2, "Завершен"));
+            ServiceStatusCombobox.ItemsSource = orderStatus;
+            ServiceStatusCombobox.SelectedItem = orderStatus.ElementAt(0);
         }
         private void Update()
         {
@@ -48,7 +62,7 @@ namespace MedLab.Pages
 
         private void PatientCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var curService = ServicesCombobox.SelectedItem as Service;
+            var curService = ServicesCombobox.SelectedItem as Services;
             App.CurrentService = curService;
             if (curService!= null)
             {
@@ -61,7 +75,7 @@ namespace MedLab.Pages
 
         private void ServicesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var curPatient = PatientsListView.SelectedItem as Patient;
+            var curPatient = PatientsListView.SelectedItem as Patients;
             App.CurrentPatient = curPatient;
 
             if (curPatient != null)
@@ -70,8 +84,6 @@ namespace MedLab.Pages
                 PassportTextBox.Text = curPatient.Passport;
                 PhoneTextBox.Text = curPatient.Phone;
                 EmailTextBox.Text = curPatient.Email;
-                InsuranceComboBox.SelectedIndex = (int)curPatient.id_InsuranceCompany - 1;
-                NumInsuranceTextBox.Text = curPatient.Num_Insurance_policy;
                 BDayDatePicker.SelectedDate = curPatient.Bday;
             }
         }
@@ -80,25 +92,30 @@ namespace MedLab.Pages
         {
             if (CheckIsAllowed()) 
             { 
-            var curPatient = App.CurrentPatient;
-            var curUser = App.CurrentUser;
-            var curService = App.CurrentService;
-            var order = new Order();
-            int countid = App.Context.Orders.Max(p => p.id);
-            order.id = countid + 1;
-            order.date = DateTime.Now;
-            order.id_patient = curPatient.id;
-            order.id_employee = curUser.id;
-            order.id_services =curService.id;
-            order.num_order = IDTestTubeTextBox.Text;
-            order.cost_order = decimal.Parse(CostTextBox.Text);
-            order.service_Name = curService.Name;
-            order.patient_FIO = curPatient.FIO;
-            order.employee_FIO = curUser.FIO;
-            MessageBox.Show("Заказ добавлен","Заказ № "+order.id+"");
-
-            App.Context.Orders.Add(order);
-            App.Context.SaveChanges();
+                var curPatient = App.CurrentPatient;
+                var curUser = App.CurrentUser;
+                var curService = App.CurrentService;
+                var order = new Orders();
+                try
+                {
+                    order.id = App.Context.Orders.Max(p => p.id) + 1;
+                }
+                catch (InvalidOperationException)
+                {
+                    order.id = 1;
+                }
+                order.date = DateTime.Now;
+                order.id_patient = curPatient.id;
+                order.id_employee = curUser.ID;
+                order.id_services =curService.id;
+                order.cost_order = decimal.Parse(CostTextBox.Text);
+                order.service_Name = curService.Name;
+                order.Status = (OrderStatusEnum)((KeyValuePair<int, string>) ServiceStatusCombobox.SelectedItem).Key;
+                order.patient_FIO = curPatient.FIO;
+                order.employee_FIO = curUser.FIO;
+                App.Context.Orders.Add(order);
+                App.Context.SaveChanges();
+                MessageBox.Show("Заказ добавлен", "Заказ № " + order.id + "");
             }
 
         }
@@ -108,9 +125,7 @@ namespace MedLab.Pages
             BDayDatePicker.IsEnabled = !position;
             PassportTextBox.IsReadOnly = position;
             PhoneTextBox.IsReadOnly = position;
-            InsuranceComboBox.IsEnabled = !position;
             EmailTextBox.IsReadOnly = position;
-            NumInsuranceTextBox.IsReadOnly = position;
             
         }
 
@@ -147,11 +162,7 @@ namespace MedLab.Pages
         private bool CheckIsAllowed()
         {
 
-            if (IDTestTubeTextBox.Text == null|| IDTestTubeTextBox.Text == "")
-            { 
-                MessageBox.Show("Введите код пробирки", "Ошибка");
-                return false;
-            }
+            
             if (ServicesCombobox.SelectedIndex == -1)
             {
                 MessageBox.Show("Услуга не выбрана", "Ошибка");
@@ -164,12 +175,7 @@ namespace MedLab.Pages
                 
                 return false;
             }
-            if(IDTestTubeTextBox.Text.Length!=5)
-            {
-                MessageBox.Show("Недопустимое количество символов: "+ IDTestTubeTextBox.Text.Length + ". Код пробирки должен состоять из 5-ти символов.", "Ошибка");
-                
-                return false;
-            }
+           
             return true;
         }
     }
